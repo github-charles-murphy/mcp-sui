@@ -1,0 +1,16 @@
+runtime: "container"
+build:
+  dockerfile: "Dockerfile"
+  dockerBuildPath: "."
+startCommand:
+  type: "http"
+  configSchema:
+    type: "object"
+    properties:
+      network:
+        type: "string"
+        enum: ["mainnet", "testnet", "devnet", "local"]
+        description: "Default network"
+    required: []
+  exampleConfig:
+    network: "testnet"
