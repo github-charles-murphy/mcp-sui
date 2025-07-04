@@ -71,6 +71,21 @@ docker run --rm -it \
 
 Set additional `SUI_*_RPC` variables if you need custom RPC endpoints.
 
+## RPC Connectivity
+
+When running inside certain restricted environments the Node.js runtime may not
+be permitted to reach the configured Sui RPC URLs and will throw `ENETUNREACH`
+errors. You can verify network access with a simple `curl` command:
+
+```bash
+curl -X POST $SUI_TESTNET_RPC \
+  -H 'Content-Type: application/json' \
+  -d '{"jsonrpc":"2.0","method":"sui_getLatestCheckpointSequenceNumber","id":1}'
+```
+
+If the command returns a numeric result, the endpoint is reachable and the MCP
+server will work correctly when network egress is allowed.
+
 ## Example mcp.json
 
 Chat-oriented MCP hosts like Claude Desktop expect a `mcp.json` file describing
