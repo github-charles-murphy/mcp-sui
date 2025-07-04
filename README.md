@@ -132,3 +132,40 @@ The included `smithery.yaml` uses the container runtime. The image must listen o
 `PORT` and expose `/mcp` for GET, POST and DELETE requests as defined by Smithery.
 See the [Smithery docs](https://smithery.ai/docs/build/deployments) for details.
 
+## Testing
+
+### cURL
+
+After building the Docker image, start the MCP server:
+
+```bash
+docker build -t mcp-sui .
+docker run --rm -p 8000:8000 -e SUI_NETWORK=testnet mcp-sui
+```
+
+In another terminal, verify that tools are listed:
+
+```bash
+curl http://localhost:8000/mcp
+```
+
+Invoke a tool, for example `create_account`:
+
+```bash
+curl -X POST -H 'Content-Type: application/json' \
+  -d '{"method":"create_account"}' \
+  http://localhost:8000/mcp
+```
+
+### MCP Inspector
+
+You can explore the server using the MCP Inspector. This command launches the
+inspector and starts the server via Docker:
+
+```bash
+npx @modelcontextprotocol/inspector \
+  docker run --rm -p 8000:8000 -e SUI_NETWORK=testnet mcp-sui
+```
+
+The inspector UI will open in your browser and let you call tools interactively.
+
