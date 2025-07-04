@@ -253,7 +253,6 @@ const multiSigPublicKey = MultiSigPublicKey.fromPublicKeys({
     "@modelcontextprotocol/sdk": "^0.6.0",
     "@mysten/sui": "^1.35.0",
     "zod": "^3.22.0",
-    "axios": "^1.6.0",
     "dotenv": "^16.3.0"
   }
 }
